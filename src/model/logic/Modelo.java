@@ -1,5 +1,10 @@
 package model.logic;
 
+import java.io.BufferedReader;
+import java.io.FileInputStream;
+import java.io.InputStreamReader;
+import java.util.LinkedList;
+
 import model.data_structures.ArregloDinamico;
 import model.data_structures.IArregloDinamico;
 
@@ -8,17 +13,16 @@ import model.data_structures.IArregloDinamico;
  *
  */
 public class Modelo {
-	/**
-	 * Atributos del modelo del mundo
-	 */
-	private IArregloDinamico datos;
+	
+	
+	private LinkedList<T> linkedList;
 	
 	/**
 	 * Constructor del modelo del mundo con capacidad predefinida
 	 */
 	public Modelo()
 	{
-		datos = new ArregloDinamico(7);
+		linkedList = new LinkedList<T>();
 	}
 	
 	/**
@@ -67,6 +71,78 @@ public class Modelo {
 	{
 		return datos.eliminar(dato);
 	}
+	
+
+   
+    	
+    	private FCollection g;
+
+    	private tablaDeHashLinearProbing<String, Feature> TablaHashZn;
+    	/**
+    	 * Constructor del modelo del mundo con capacidad predefinida
+    	 */
+    	public MVCModelo()
+    	{
+    		arbolHora = new ArbolRojoNegro();
+    		arbolSemana = new ArbolRojoNegro();
+    		arbolMes = new ArbolRojoNegro();
+    		//queue = new MaxPQ();
+    		table = new tablaDeHashLinearProbing();
+    	}
+    	
+    		//--------------------------------------------------------------------------------------
+    		//JSON READER
+    	
+    	    public  FCollection JSONReader() throws Exception 
+    	    {
+
+    	    	FileInputStream inputStream = new FileInputStream("data/bogota_cadastral.json");
+
+    	        inputStream  = new FileInputStream("./data/bogota_cadastral.json");
+    	        InputStreamReader inputStreamReader = new InputStreamReader(inputStream);
+    	        BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
+
+
+    	         g = new Gson().fromJson(bufferedReader, FCollection.class);
+    	        
+    	        System.out.println("Zonas cargadas por JSON fueron: " +g.features[g.features.length-1].properties.MOVEMENT_ID);
+    	        return g;
+
+    	    }
+
+    	    
+    	    class Properties 
+    	    {
+    	    	long cartodb_id;
+    	        String scacodigo;
+    	        long scatipo;
+    	        String scanombre;
+    	        double shape_leng;
+    	        double shape_area;
+    	        String MOVEMENT_ID;
+    	        String DISPLAY_NAME;
+    	    }
+
+    	    class GeometryData {
+    	        String type;
+    	        double[][][][] coordinates;
+
+    	    }
+
+    	    class Feature {
+    	        String type;
+    	        GeometryData geometry;
+    	        Properties properties;
+    	    }
+    	    
+    	    class FCollection 
+    	    {
+    	        String type;
+    	        Feature[] features;
+    	        
+    	    }
+    	    
+    	   
 
 
 }
