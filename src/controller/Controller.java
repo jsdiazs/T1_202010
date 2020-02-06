@@ -36,8 +36,7 @@ public class Controller {
 			int option = lector.nextInt();
 			switch(option){
 				case 1:
-					view.printMessage("--------- \nRealizar carga de los comparendos ");
-					view.printMessage("Información del primer comparendo");
+					view.printMessage("Información del primer comparendo: "+ modelo.);
 					view.printMessage("Información del último comparendo");
 				    view.printMessage("Numero total de comparendos en la lista:");						
 					break;
@@ -47,12 +46,11 @@ public class Controller {
 					dato = lector.next();
 					//METODO QUE RETORNE EL COMPARENDO RESULTANTE 
 					//OBJECTID debe ser el parametro 
-					//REPORTAR CASO EN EL QUE NO EXISTA
-					modelo.agregar(dato);
-					view.printMessage("Dato agregado");
-					view.printMessage("Numero actual de elementos " + modelo.darTamano() + "\n---------");						
+					//REPORTAR CASO EN EL QUE NO EXISTA			
 					break;
 
+				case 3:
+					break;
 				default: 
 					view.printMessage("--------- \n Opcion Invalida !! \n---------");
 					break;

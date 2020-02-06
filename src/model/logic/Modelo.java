@@ -5,6 +5,8 @@ import java.io.FileInputStream;
 import java.io.InputStreamReader;
 import java.util.LinkedList;
 
+import com.google.gson.Gson;
+
 import model.data_structures.ArregloDinamico;
 import model.data_structures.IArregloDinamico;
 
@@ -25,6 +27,8 @@ public class Modelo {
 	{
 		list = new LinkedList();
 	}
+	
+	
 
 
     		//--------------------------------------------------------------------------------------
@@ -33,14 +37,13 @@ public class Modelo {
     	    public  FCollection JSONReader() throws Exception 
     	    {
 
-    	    	FileInputStream inputStream = new FileInputStream("data/comparendos_dei_2018_small.geojson");
-
+        	   	FileInputStream inputStream = new FileInputStream("data/comparendos_dei_2018_small.geojson");
     	        inputStream  = new FileInputStream("./data/comparendos_dei_2018_small.geojson");
     	        InputStreamReader inputStreamReader = new InputStreamReader(inputStream);
     	        BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
 
 
-    	         g = new Gson.fromJson(bufferedReader, FCollection.class);
+    	         g = new Gson().fromJson(bufferedReader, FCollection.class);
     	        
     	        System.out.println("Zonas cargadas por JSON fueron: " +g.features[g.features.length-1].properties.MOVEMENT_ID);
     	        return g;
